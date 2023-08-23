@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text Encryption/Decryption</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    #output {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Text Encryption/Decryption</h1>
+  <label for="text">Enter your text:</label>
+  <textarea id="text" placeholder="Enter your text here"></textarea>
+  <br>
+  <button onclick="encrypt()">Encrypt</button>
+  <button onclick="decrypt()">Decrypt</button>
+  <div id="output"></div>
+
+  <script>
+    function caesarCipher(text, shift) {
+      return text.replace(/[a-zA-Z]/g, function (char) {
+        const code = char.charCodeAt(0);
+        const base = char >= "a" ? "a".charCodeAt(0) : "A".charCodeAt(0);
+        return String.fromCharCode(((code - base + shift) % 26) + base);
+      });
+    }
+
+    function encrypt() {
+      const inputText = document.getElementById("text").value;
+      const shift = parseInt(prompt("Enter the shift value for encryption (0-25):"));
+      if (!isNaN(shift) && shift >= 0 && shift <= 25) {
+        const encryptedText = caesarCipher(inputText, shift);
+        document.getElementById("output").innerText = encryptedText;
+      } else {
+        alert("Invalid shift value! Please enter a number between 0 and 25.");
+      }
+    }
+
+    function decrypt() {
+      const inputText = document.getElementById("text").value;
+      const shift = parseInt(prompt("Enter the shift value for decryption (0-25):"));
+      if (!isNaN(shift) && shift >= 0 && shift <= 25) {
+        const decryptedText = caesarCipher(inputText, 26 - shift); // Decryption is just the reverse of encryption with the complementary shift.
+        document.getElementById("output").innerText = decryptedText;
+      } else {
+        alert("Invalid shift value! Please enter a number between 0 and 25.");
+      }
+    }
+  </script>
+</body>
+</html>

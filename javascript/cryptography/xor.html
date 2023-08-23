@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Encryption/Decryption Tool</title>
+</head>
+<body>
+  <input type="file" id="fileInput" />
+  <input type="password" id="passwordInput" placeholder="Password" />
+  <button onclick="encryptFile()">Encrypt</button>
+  <button onclick="decryptFile()">Decrypt</button>
+
+  <script>
+    async function encryptFile() {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+      const passwordInput = document.getElementById('passwordInput');
+      const password = passwordInput.value;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        const fileData = reader.result;
+        const encryptedData = encryptData(fileData, password);
+        downloadFile(encryptedData, 'encrypted_file.txt', 'text/plain');
+      };
+      reader.readAsText(file);
+    }
+
+    async function decryptFile() {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+      const passwordInput = document.getElementById('passwordInput');
+      const password = passwordInput.value;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        const fileData = reader.result;
+        const decryptedData = decryptData(fileData, password);
+        downloadFile(decryptedData, 'decrypted_file.txt', 'text/plain');
+      };
+      reader.readAsText(file);
+    }
+
+    function encryptData(data, password) {
+      const encoder = new TextEncoder();
+      const passwordData = encoder.encode(password);
+
+      const encryptedData = [];
+      for (let i = 0; i < data.length; i++) {
+        const charCode = data.charCodeAt(i) ^ passwordData[i % passwordData.length];
+        encryptedData.push(String.fromCharCode(charCode));
+      }
+
+      return encryptedData.join('');
+    }
+
+    function decryptData(data, password) {
+      const encoder = new TextEncoder();
+      const passwordData = encoder.encode(password);
+
+      const decryptedData = [];
+      for (let i = 0; i < data.length; i++) {
+        const charCode = data.charCodeAt(i) ^ passwordData[i % passwordData.length];
+        decryptedData.push(String.fromCharCode(charCode));
+      }
+
+      return decryptedData.join('');
+    }
+
+    function downloadFile(data, fileName, fileType) {
+      const blob = new Blob([data], { type: fileType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

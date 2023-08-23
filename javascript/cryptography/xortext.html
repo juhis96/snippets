@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text Encryption/Decryption</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background-color:white;
+      background-image: url('https://a-z-animals.com/media/2023/01/shutterstock_1669108984-1024x683.jpeg');
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-color: #f2f2f2;
+    }
+
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      grid-gap: 10px;
+    }
+
+    textarea {
+      grid-column: 1 / span 2;
+      height: 200px;
+      resize: vertical;
+      border: 1px solid #ccc;
+      padding: 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    #password {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .button-container {
+      grid-column: 2;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-left: 10px;
+    }
+
+    #output {
+      grid-column: 1 / span 2;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <textarea id="text" placeholder="Enter your text here"></textarea>
+    <input type="password" id="password" placeholder="Password">
+    <div class="button-container">
+      <button onclick="encrypt()">Encrypt</button>
+      <button onclick="decrypt()">Decrypt</button>
+    </div>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function xorEncryptDecrypt(text, key) {
+      let result = "";
+      for (let i = 0; i < text.length; i++) {
+        const charCode = text.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+        result += String.fromCharCode(charCode);
+      }
+      return result;
+    }
+
+    function encrypt() {
+      const inputText = document.getElementById("text").value;
+      const password = document.getElementById("password").value;
+
+      const encryptedText = xorEncryptDecrypt(inputText, password);
+      document.getElementById("output").innerText = btoa(encryptedText);
+    }
+
+    function decrypt() {
+      const inputText = document.getElementById("text").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const decryptedText = xorEncryptDecrypt(atob(inputText), password);
+        document.getElementById("output").innerText = decryptedText;
+      } catch (error) {
+        alert("Decryption failed! Please check your passphrase and try again.");
+      }
+    }
+  </script>
+</body>
+</html>

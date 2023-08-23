@@ -1,0 +1,384 @@
+/* App Page */
+body.app {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color:white;
+}
+
+.app-selection-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.app-selection-container {
+  text-align: center;
+}
+
+.app-selection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.app-selection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.app-button {
+  width: 64px;
+  height: 64px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.app-button:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  background-color: white;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.footer {
+  background-color: #f8f8f8;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #f5f5f5;
+  padding: 20px;
+  width: 300px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  /*transition: background-color 0.3s ease;*/
+}
+
+.sidebar a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.sidebar a.grayish:hover {
+  background-color: #ccc;
+}
+
+/* Content */
+.content {
+  margin-left: 320px; /* Adjust the value as needed for spacing */
+  padding: 20px;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button-white {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.button-green {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.button-red {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.button-orange {
+  background-color: #fd7e14;
+  color: #fff;
+}
+
+.button-blue {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.button-white:hover {
+  background-color: #f5f5f5;
+  color: #007bff;
+}
+
+.button-green:hover {
+  background-color: #218838;
+  color: #fff;
+}
+
+.button-red:hover {
+  background-color: #c82333;
+  color: #fff;
+}
+
+.button-orange:hover {
+  background-color: #f0ad4e;
+  color: #fff;
+}
+
+.button-blue:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+/* Disabled Button */
+.disabled-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.disabled-button:hover {
+  background-color: #ccc;
+  color: #fff;
+}
+
+
+/* Input Fields */
+.input-field {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Password Text Field */
+.password-field {
+  display: inline-block;
+  position: relative;
+}
+
+.password-field input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 200px;
+}
+
+.password-field .show-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Username Text Field */
+.username-field {
+  display: inline-block;
+  position: relative;
+}
+
+.username-field input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 200px;
+}
+
+/* Radio Buttons */
+.radio-label {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.radio-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.radio-label:hover input ~ .radio-checkmark {
+  background-color: #ccc;
+}
+
+.radio-label input:checked ~ .radio-checkmark {
+  background-color: #007bff;
+}
+
+.radio-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radio-label input:checked ~ .radio-checkmark:after {
+  display: block;
+}
+
+.radio-label .radio-checkmark:after {
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* Checkboxes */
+.checkbox-label {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 2px;
+}
+
+.checkbox-label:hover input ~ .checkbox-checkmark {
+  background-color: #ccc;
+}
+
+.checkbox-label input:checked ~ .checkbox-checkmark {
+  background-color: #007bff;
+}
+
+.checkbox-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-label input:checked ~ .checkbox-checkmark:after {
+  display: block;
+}
+
+.checkbox-label .checkbox-checkmark:after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 7px;
+  width: 4px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Encryption/Decryption Tool (AES)</title>
+  <style>
+      body{
+      background-color:black;
+      color:red;
+      text-align:center;
+    }
+    #fileInput {
+      display: none;
+    }
+    #dropArea {
+      border: 2px dashed #ccc;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      width:300px;
+      margin:auto;
+    }
+    .ascii{
+      color: red; background: black;
+      display:inline-block;
+      white-space:pre;
+      letter-spacing:0;
+      line-height:1.4;
+      font-family:'Consolas','BitstreamVeraSansMono','CourierNew',Courier,monospace;
+      font-size:12px;
+    }
+    .crypter{
+      padding: 25px;
+      border: 1px solid red;
+      width:400px;
+      height:150px;
+      margin:auto;
+    }
+  </style>
+</head>
+<body>
+<code><span class="ascii"><span> </span><span> </span><span> </span><span> </span><span>(</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>*</span><span> </span><span> </span><span> </span>
+<span> </span><span> </span><span>,</span><span>@</span><span>@</span><span>/</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>*</span><span>(</span><span>%</span><span>&</span><span>&</span><span>%</span><span>(</span><span>/</span><span>*</span><span>.</span><span>.</span><span>,</span><span>*</span><span>/</span><span>#</span><span>%</span><span>&</span><span>&</span><span>#</span><span>/</span><span>*</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>%</span><span>@</span><span>%</span><span> </span><span> </span>
+<span> </span><span>,</span><span>@</span><span>(</span><span>@</span><span>@</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>(</span><span>@</span><span>@</span><span>&</span><span>/</span><span> </span><span>.</span><span>#</span><span>@</span><span>@</span><span>#</span><span>*</span><span>,</span><span>,</span><span>*</span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>*</span><span>,</span><span>,</span><span>/</span><span>&</span><span>@</span><span>&</span><span>/</span><span>.</span><span>.</span><span>#</span><span>@</span><span>@</span><span>&</span><span>*</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>*</span><span>@</span><span>@</span><span>#</span><span>&</span><span> </span>
+<span> </span><span>&</span><span>(</span><span>*</span><span>@</span><span>@</span><span>&</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span>&</span><span>@</span><span>#</span><span>,</span><span>.</span><span>(</span><span>%</span><span>(</span><span>(</span><span>%</span><span>%</span><span>/</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>,</span><span>(</span><span>%</span><span>%</span><span>(</span><span>(</span><span>%</span><span>*</span><span> </span><span>*</span><span>%</span><span>@</span><span>%</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>,</span><span>@</span><span>@</span><span>@</span><span>.</span><span>@</span><span>#</span>
+<span>*</span><span>@</span><span>.</span><span>.</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>#</span><span>@</span><span>/</span><span> </span><span> </span><span>*</span><span>*</span><span>.</span><span>,</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>,</span><span>.</span><span>(</span><span>.</span><span> </span><span> </span><span>#</span><span>@</span><span>/</span><span> </span><span> </span><span> </span><span> </span><span> </span><span>,</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span> </span><span>,</span><span>@</span>
+<span>/</span><span>&</span><span> </span><span> </span><span>,</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>#</span><span>/</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>,</span><span>/</span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span> </span><span> </span><span>.</span><span>@</span>
+<span>,</span><span>@</span><span>.</span><span> </span><span> </span><span> </span><span>,</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>/</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>*</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>*</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span> </span><span> </span><span> </span><span> </span><span>*</span><span>@</span>
+<span> </span><span>&</span><span>(</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>(</span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>(</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span> </span><span> </span><span> </span><span> </span><span> </span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>(</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>,</span><span>@</span><span>#</span>
+<span> </span><span>.</span><span>@</span><span>/</span><span>#</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>,</span><span> </span><span> </span><span> </span><span>/</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>(</span><span>,</span><span> </span><span> </span><span> </span><span>#</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>&</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>(</span><span>%</span><span>&</span><span> </span>
+<span> </span><span> </span><span>,</span><span>@</span><span>#</span><span>&</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>#</span><span>%</span><span>*</span><span>&</span><span>@</span><span>@</span><span>@</span><span>&</span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>&</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>#</span><span> </span><span> </span><span> </span><span> </span><span>*</span><span>@</span><span>@</span><span>@</span><span>@</span><span>(</span><span>/</span><span>&</span><span>/</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span>#</span><span>%</span><span>%</span><span> </span><span> </span>
+<span> </span><span> </span><span> </span><span> </span><span>#</span><span>@</span><span>#</span><span>&</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span> </span><span>%</span><span>&</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span>(</span><span>*</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>&</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span>,</span><span>@</span><span>/</span><span> </span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span>@</span><span>#</span><span>@</span><span>*</span><span> </span><span> </span><span> </span>
+<span> </span><span> </span><span> </span><span>#</span><span>%</span><span>.</span><span>@</span><span>@</span><span>%</span><span>(</span><span>(</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>%</span><span>#</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>#</span><span>/</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>%</span><span>/</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>,</span><span>&</span><span>(</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>#</span><span>(</span><span>&</span><span>@</span><span>&</span><span>.</span><span>&</span><span>*</span><span> </span><span> </span>
+<span> </span><span> </span><span>/</span><span>&</span><span>,</span><span>@</span><span>@</span><span>@</span><span>@</span><span>.</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>#</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span>*</span><span> </span><span> </span><span>%</span><span>(</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>&</span><span>/</span><span> </span><span> </span><span>*</span><span> </span><span> </span><span> </span><span> </span><span> </span><span>,</span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>#</span><span>*</span><span>@</span><span>@</span><span>@</span><span>@</span><span>*</span><span>@</span><span> </span><span> </span>
+<span> </span><span> </span><span>@</span><span>/</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>(</span><span>*</span><span> </span><span>/</span><span>*</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>%</span><span>.</span><span> </span><span>#</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>.</span><span>@</span><span>@</span><span>@</span><span>@</span><span>(</span><span>#</span><span>%</span><span> </span>
+<span> </span><span>/</span><span>@</span><span>/</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span>(</span><span>.</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>@</span><span>,</span><span> </span><span>%</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>#</span><span> </span><span>#</span><span>#</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>*</span><span>(</span><span>/</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>/</span><span>@</span><span> </span>
+<span> </span><span>&</span><span>%</span><span>/</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>#</span><span>&</span><span>(</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>,</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>,</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>@</span><span>@</span><span>#</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>*</span><span>@</span><span>*</span>
+<span> </span><span>@</span><span>(</span><span>(</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>(</span><span>/</span><span>%</span><span>/</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>,</span><span>(</span><span>&</span><span>@</span><span>@</span><span>@</span><span>%</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span>&</span><span>@</span><span>@</span><span>@</span><span>%</span><span>/</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>#</span><span>(</span><span>(</span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>*</span><span>@</span><span>#</span>
+<span> </span><span>@</span><span>(</span><span>(</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>#</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>,</span><span>,</span><span>.</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span> </span><span> </span><span> </span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>,</span><span>,</span><span>,</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>&</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>,</span><span>@</span><span>%</span>
+<span> </span><span>&</span><span>#</span><span>*</span><span>@</span><span>@</span><span>@</span><span>@</span><span>*</span><span> </span><span> </span><span> </span><span>.</span><span>/</span><span>.</span><span> </span><span>,</span><span>%</span><span>&</span><span>%</span><span>&</span><span>@</span><span>@</span><span>#</span><span>*</span><span>%</span><span>&</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>(</span><span>&</span><span>,</span><span>@</span><span>*</span><span>%</span><span>,</span><span>@</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span>@</span><span>#</span><span>/</span><span>&</span><span>@</span><span>@</span><span>&</span><span>&</span><span>&</span><span>#</span><span> </span><span> </span><span>,</span><span>/</span><span> </span><span> </span><span> </span><span> </span><span>#</span><span>@</span><span>@</span><span>@</span><span>@</span><span>,</span><span>@</span><span>/</span>
+<span> </span><span>(</span><span>&</span><span>,</span><span>@</span><span>@</span><span>@</span><span>@</span><span>(</span><span> </span><span>(</span><span> </span><span> </span><span>.</span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span>/</span><span>*</span><span>,</span><span>,</span><span>.</span><span> </span><span> </span><span>*</span><span>.</span><span>&</span><span>@</span><span>(</span><span>.</span><span>,</span><span> </span><span> </span><span>.</span><span>,</span><span>,</span><span>*</span><span>(</span><span>&</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>(</span><span> </span><span> </span><span>.</span><span>,</span><span> </span><span>&</span><span>@</span><span>@</span><span>@</span><span>&</span><span>,</span><span>@</span><span>.</span>
+<span> </span><span>.</span><span>@</span><span>*</span><span>@</span><span>@</span><span>@</span><span>@</span><span>&</span><span>%</span><span> </span><span>*</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>#</span><span> </span><span> </span><span>.</span><span>&</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>&</span><span> </span><span>.</span><span>&</span><span>&</span><span>@</span><span>@</span><span>@</span><span>#</span><span>(</span><span>&</span><span> </span>
+<span> </span><span> </span><span>(</span><span>%</span><span>#</span><span>@</span><span>@</span><span>&</span><span>.</span><span> </span><span>.</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>#</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span> </span><span> </span><span>*</span><span>@</span><span>@</span><span>@</span><span>/</span><span>@</span><span>.</span><span> </span>
+<span> </span><span> </span><span> </span><span>&</span><span>*</span><span>@</span><span>@</span><span>,</span><span> </span><span> </span><span> </span><span>#</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>*</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>,</span><span> </span><span> </span><span> </span><span>#</span><span>@</span><span>@</span><span>(</span><span>%</span><span> </span><span> </span>
+<span> </span><span> </span><span> </span><span>&</span><span>#</span><span>&</span><span>@</span><span>@</span><span>(</span><span> </span><span>,</span><span>.</span><span>.</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>#</span><span>@</span><span>(</span><span> </span><span> </span><span>&</span><span>@</span><span>*</span><span>@</span><span>#</span><span> </span><span> </span><span>&</span><span>&</span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>#</span><span> </span><span>/</span><span> </span><span>.</span><span>&</span><span>@</span><span>@</span><span>*</span><span>&</span><span>/</span><span> </span><span> </span>
+<span> </span><span> </span><span> </span><span>#</span><span>&</span><span>.</span><span>@</span><span>@</span><span>@</span><span>&</span><span> </span><span>.</span><span>#</span><span> </span><span>,</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>,</span><span>%</span><span>@</span><span>/</span><span> </span><span> </span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span> </span><span> </span><span>%</span><span>@</span><span>(</span><span>*</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>&</span><span>.</span><span>.</span><span>%</span><span> </span><span>,</span><span>@</span><span>@</span><span>@</span><span>@</span><span>.</span><span>@</span><span>*</span><span> </span><span> </span>
+<span> </span><span> </span><span> </span><span>*</span><span>@</span><span>.</span><span>#</span><span>@</span><span>@</span><span>@</span><span>/</span><span> </span><span>(</span><span>/</span><span> </span><span>#</span><span>/</span><span>,</span><span>#</span><span>&</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span>*</span><span> </span><span>.</span><span>#</span><span>@</span><span>@</span><span>(</span><span> </span><span>,</span><span>.</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>&</span><span> </span><span>.</span><span>.</span><span>%</span><span>@</span><span>&</span><span>/</span><span> </span><span>.</span><span>(</span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span>(</span><span>,</span><span>#</span><span>/</span><span> </span><span>#</span><span>.</span><span> </span><span>%</span><span>@</span><span>@</span><span>@</span><span>.</span><span>(</span><span>@</span><span>.</span><span> </span><span> </span>
+<span> </span><span> </span><span> </span><span> </span><span>#</span><span>@</span><span>.</span><span>&</span><span>@</span><span>@</span><span>,</span><span> </span><span>,</span><span>&</span><span> </span><span> </span><span> </span><span>.</span><span>(</span><span>@</span><span>/</span><span> </span><span> </span><span> </span><span>,</span><span>#</span><span>#</span><span>.</span><span>/</span><span>(</span><span> </span><span> </span><span>,</span><span>#</span><span>,</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>,</span><span>#</span><span> </span><span> </span><span> </span><span>%</span><span>,</span><span>*</span><span>%</span><span>/</span><span>.</span><span> </span><span> </span><span>.</span><span>#</span><span>&</span><span>*</span><span> </span><span> </span><span> </span><span>,</span><span>%</span><span> </span><span> </span><span>#</span><span>@</span><span>@</span><span>#</span><span>,</span><span>@</span><span>*</span><span> </span><span> </span><span> </span>
+<span> </span><span> </span><span> </span><span> </span><span> </span><span>*</span><span>&</span><span>,</span><span>@</span><span>/</span><span>*</span><span> </span><span> </span><span>,</span><span>&</span><span>,</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>%</span><span>*</span><span>%</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>(</span><span>(</span><span>(</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span>%</span><span> </span><span> </span><span> </span><span>.</span><span>%</span><span>%</span><span>.</span><span>@</span><span>.</span><span> </span><span> </span><span> </span><span> </span>
+<span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>&</span><span>,</span><span>#</span><span>.</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>@</span><span>#</span><span>,</span><span>&</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>@</span><span>%</span><span>.</span><span>&</span><span>%</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>#</span><span>,</span><span>/</span><span>#</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span>
+<span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>.</span><span>&</span><span>.</span><span>&</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>#</span><span>@</span><span>@</span><span>&</span><span>.</span><span> </span><span>*</span><span>@</span><span>@</span><span>@</span><span>*</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span><span>/</span><span>(</span><span>,</span><span>&</span><span> </span><span> </span><span> </span><span> </span><span> </span><span> </span>
+</span></code>
+<br>
+<div class="crypter">
+  <div id="dropArea" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+    <p>Drag and drop a file here</p>
+    <input type="file" id="fileInput" onchange="handleFileSelect(event)" />
+  </div>
+  <br>
+  <input type="password" id="passwordInput" placeholder="Password" />
+  <button onclick="encryptFile()">Encrypt</button>
+  <button onclick="decryptFile()">Decrypt</button>
+</div>
+
+  <script>
+    let fileData = null;
+
+    const dropAreaElement = document.getElementById('dropArea');
+
+    dropAreaElement.addEventListener('click', function () {
+      document.getElementById('fileInput').click();
+    });
+
+    function handleDragOver(event) {
+      event.preventDefault();
+      dropAreaElement.style.backgroundColor = '#f7f7f7';
+    }
+
+    function handleDrop(event) {
+      event.preventDefault();
+      dropAreaElement.style.backgroundColor = '#fff';
+
+      const files = event.dataTransfer.files;
+      handleFile(files[0]);
+    }
+
+    function handleFileSelect(event) {
+      const files = event.target.files;
+      handleFile(files[0]);
+    }
+
+    function handleFile(file) {
+      const fileInput = document.getElementById('fileInput');
+      fileInput.value = ''; // Clear the file input value
+
+      const dropArea = document.getElementById('dropArea');
+      dropArea.innerHTML = file.name;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        fileData = new Uint8Array(reader.result); // Store file data in the fileData variable
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    async function encryptFile() {
+      const passwordInput = document.getElementById('passwordInput');
+      const password = passwordInput.value;
+
+      if (!fileData) {
+        alert('Please select a file.');
+        return;
+      }
+
+      const encryptedData = await encryptData(fileData, password);
+      downloadFile(encryptedData, 'encrypted_file', 'application/octet-stream');
+    }
+
+    async function decryptFile() {
+      const passwordInput = document.getElementById('passwordInput');
+      const password = passwordInput.value;
+
+      if (!fileData) {
+        alert('Please select a file.');
+        return;
+      }
+
+      const decryptedData = await decryptData(fileData, password);
+      downloadFile(decryptedData, 'decrypted_file', 'application/octet-stream');
+    }
+
+    async function encryptData(data, password) {
+      const encoder = new TextEncoder();
+      const passwordData = encoder.encode(password);
+
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      const derivedKey = await deriveKey(passwordData, salt);
+      const iv = crypto.getRandomValues(new Uint8Array(16));
+
+      const encryptedData = await crypto.subtle.encrypt({ name: 'AES-CBC', iv }, derivedKey, data);
+
+      const encryptedBytes = new Uint8Array([...salt, ...iv, ...new Uint8Array(encryptedData)]);
+      return encryptedBytes;
+    }
+
+    async function decryptData(data, password) {
+      const encoder = new TextEncoder();
+      const passwordData = encoder.encode(password);
+
+      const salt = data.slice(0, 16);
+      const iv = data.slice(16, 32);
+      const encryptedData = data.slice(32);
+
+      const derivedKey = await deriveKey(passwordData, salt);
+      const decryptedData = await crypto.subtle.decrypt({ name: 'AES-CBC', iv }, derivedKey, encryptedData);
+      return new Uint8Array(decryptedData);
+    }
+
+    async function deriveKey(passwordData, salt) {
+      const iterations = 10000;
+      const keyLength = 256;
+
+      const importedKey = await crypto.subtle.importKey('raw', passwordData, 'PBKDF2', false, ['deriveKey']);
+      const derivedKey = await crypto.subtle.deriveKey(
+        {
+          name: 'PBKDF2',
+          salt,
+          iterations,
+          hash: 'SHA-256'
+        },
+        importedKey,
+        { name: 'AES-CBC', length: keyLength },
+        true,
+        ['encrypt', 'decrypt']
+      );
+
+      return derivedKey;
+    }
+
+    function downloadFile(data, fileName, fileType) {
+      const blob = new Blob([data], { type: fileType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
