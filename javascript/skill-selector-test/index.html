@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Selection Form with Search</title>
+    <style>
+        .selected-skills {
+            list-style: none;
+            padding: 0;
+        }
+        .selected-skills li {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Select Skills</h2>
+    
+    <form>
+        <label for="skillDropdown">Select or Search Skills:</label>
+        <input type="text" id="skillSearch" placeholder="Search skills...">
+        <select id="skillDropdown">
+            <option value="">-- Select a Skill --</option>
+            <!-- Populate this dropdown dynamically using JavaScript -->
+        </select>
+        <button type="button" id="addSkillButton">Add Skill</button>
+    </form>
+    
+    <h3>Selected Skills:</h3>
+    <ul class="selected-skills" id="selectedSkills">
+        <!-- Selected skills will be displayed here -->
+    </ul>
+
+    <script>
+    const skills = [
+        "React",
+        "DevOps",
+        "MongoDB",
+        "Python",
+        "JavaScript",
+        "Node.js",
+        "SQL",
+        "Docker",
+        "Kubernetes",
+        "Git",
+        "HTML/CSS",
+        "AWS",
+        "Azure",
+        "Machine Learning",
+        "Data Analysis",
+        "Java",
+        "C++",
+        "Ruby on Rails",
+        "Android Development",
+        "iOS Development",
+        "Blockchain",
+        "UI/UX Design",
+        "Agile Methodology",
+        "Scrum",
+        "Artificial Intelligence",
+        "Natural Language Processing",
+        "Cybersecurity",
+        "Big Data",
+        "GraphQL",
+        "RESTful APIs",
+        "Vue.js",
+        "Angular",
+        "Swift",
+        "TensorFlow",
+        "Kotlin",
+        "Flutter",
+        "WordPress",
+        "PHP",
+        "Rust",
+        "Shell Scripting",
+        "GraphQL",
+        "CI/CD",
+        "Jenkins",
+        "Redux",
+        "Webpack",
+        "Vue.js",
+        "RPA (Robotic Process Automation)",
+        "Data Science",
+        "Blockchain",
+        "Front-End Development",
+        "Back-End Development",
+        "Full-Stack Development",
+        "Cloud Computing",
+        "Containerization",
+        "Serverless Architecture",
+        "Microservices",
+        "Responsive Web Design"
+      ];
+
+        const skillDropdown = document.getElementById("skillDropdown");
+        const skillSearch = document.getElementById("skillSearch");
+        const addSkillButton = document.getElementById("addSkillButton");
+        const selectedSkillsList = document.getElementById("selectedSkills");
+
+        // Populate the dropdown with skills
+        skills.forEach(skill => {
+            const option = document.createElement("option");
+            option.value = skill;
+            option.textContent = skill;
+            skillDropdown.appendChild(option);
+        });
+
+        // Event listener for adding a skill to the selected list
+        addSkillButton.addEventListener("click", () => {
+            const selectedSkill = skillDropdown.value;
+
+            if (selectedSkill) {
+                const listItem = document.createElement("li");
+                listItem.textContent = selectedSkill;
+                selectedSkillsList.appendChild(listItem);
+
+                // Clear the selected skill from the dropdown
+                skillDropdown.value = "";
+            }
+        });
+
+        // Event listener for filtering skills based on search input
+        skillSearch.addEventListener("input", () => {
+            const searchValue = skillSearch.value.toLowerCase();
+
+            skills.forEach(skill => {
+                const option = skillDropdown.querySelector(`option[value="${skill}"]`);
+                if (option) {
+                    const skillText = skill.toLowerCase();
+                    if (skillText.includes(searchValue)) {
+                        option.style.display = "block";
+                    } else {
+                        option.style.display = "none";
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

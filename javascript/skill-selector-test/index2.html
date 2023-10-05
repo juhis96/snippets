@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Selection Form with Search and Custom Values</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>Select Skills</h2>
+    
+    <form>
+        <label for="skillDropdown">Select or Add Skills:</label>
+        <select id="skillDropdown" multiple="multiple" style="width: 300px;">
+            <!-- Populate this dropdown dynamically using JavaScript -->
+        </select>
+        <button type="button" id="addSkillButton">Add Skill</button>
+    </form>
+
+    <h3>Selected Skills:</h3>
+    <ul class="selected-skills" id="selectedSkills">
+        <!-- Selected skills will be displayed here -->
+    </ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        // JavaScript code to populate the Select2 dropdown
+    const skills = [
+        "React",
+        "DevOps",
+        "MongoDB",
+        "Python",
+        "JavaScript",
+        "Node.js",
+        "SQL",
+        "Docker",
+        "Kubernetes",
+        "Git",
+        "HTML/CSS",
+        "AWS",
+        "Azure",
+        "Machine Learning",
+        "Data Analysis",
+        "Java",
+        "C++",
+        "Ruby on Rails",
+        "Android Development",
+        "iOS Development",
+        "Blockchain",
+        "UI/UX Design",
+        "Agile Methodology",
+        "Scrum",
+        "Artificial Intelligence",
+        "Natural Language Processing",
+        "Cybersecurity",
+        "Big Data",
+        "GraphQL",
+        "RESTful APIs",
+        "Vue.js",
+        "Angular",
+        "Swift",
+        "TensorFlow",
+        "Kotlin",
+        "Flutter",
+        "WordPress",
+        "PHP",
+        "Rust",
+        "Shell Scripting",
+        "GraphQL",
+        "CI/CD",
+        "Jenkins",
+        "Redux",
+        "Webpack",
+        "Vue.js",
+        "RPA (Robotic Process Automation)",
+        "Data Science",
+        "Blockchain",
+        "Front-End Development",
+        "Back-End Development",
+        "Full-Stack Development",
+        "Cloud Computing",
+        "Containerization",
+        "Serverless Architecture",
+        "Microservices",
+        "Responsive Web Design"
+      ];
+
+        const skillDropdown = $("#skillDropdown");
+        const addSkillButton = $("#addSkillButton");
+        const selectedSkillsList = $("#selectedSkills");
+
+        // Populate the Select2 dropdown with skills
+        skills.forEach(skill => {
+            skillDropdown.append(new Option(skill, skill));
+        });
+
+        // Initialize Select2 with tags support (allowing custom values)
+        skillDropdown.select2({
+            tags: true
+        });
+
+        // Event listener for adding a skill to the selected list
+        addSkillButton.on("click", () => {
+            const selectedSkill = skillDropdown.val();
+            if (selectedSkill && selectedSkill.length > 0) {
+                selectedSkill.forEach(skill => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = skill;
+                    selectedSkillsList.append(listItem);
+                });
+
+                // Clear the selected skill from the dropdown
+                skillDropdown.val(null).trigger("change");
+            }
+        });
+    </script>
+</body>
+</html>
